@@ -4,35 +4,35 @@ This repository provides an end-to-end pipeline to take **Drive-JEPA** (Video JE
 
 ---
 
-## ðŸ“ Repository Structure
+## 📁 Repository Structure
 
 ```
 drive-jepa-qcom-eval/
-â”œâ”€â”€ models/
-â”‚   â”œâ”€â”€ drive_jepa_net.py            # Drive-JEPA PyTorch architecture optimized for NPU export
-â”‚   â”œâ”€â”€ drive_jepa_8650.onnx         # Exported ONNX graph (opset 18, static NPU batching)
-â”‚   â””â”€â”€ drive_jepa_8650_reference.pth # Golden PyTorch reference weights
-â”œâ”€â”€ weights/
-â”‚   â””â”€â”€ drive_jepa_perception_based_agent_resnet34.ckpt # Hugging Face open checkpoint
-â”œâ”€â”€ data/
-â”‚   â”œâ”€â”€ create_sample_data.py        # Generates calibration and test driving datasets
-â”‚   â”œâ”€â”€ calibration/                 # Calibration samples for INT8 PTQ (20 scenes)
-â”‚   â””â”€â”€ test_samples/                # Evaluation driving scenarios (highway, urban, turns)
-â”œâ”€â”€ scripts/
-â”‚   â”œâ”€â”€ download_weights.py          # Auto-downloader from Hugging Face (LinhanWang/Drive-JEPA)
-â”‚   â”œâ”€â”€ export_onnx.py               # PyTorch -> ONNX exporter with topological checker
-â”‚   â”œâ”€â”€ run_qai_hub_8650.py          # Qualcomm AI Hub job submission (compile, profile, infer)
-â”‚   â””â”€â”€ evaluate_pipeline.py         # 3-Stage KPI comparison: PyTorch vs ONNX vs QNN INT8
-â”œâ”€â”€ results/
-â”‚   â”œâ”€â”€ qnn_int8_predictions.npz     # On-device Snapdragon 8650 predictions
-â”‚   â””â”€â”€ evaluation_report.md         # Auto-generated quantitative KPI markdown report
-â”œâ”€â”€ README.md
-â””â”€â”€ requirements.txt
+├── models/
+│   ├── drive_jepa_net.py            # Drive-JEPA PyTorch architecture optimized for NPU export
+│   ├── drive_jepa_8650.onnx         # Exported ONNX graph (opset 18, static NPU batching)
+│   └── drive_jepa_8650_reference.pth # Golden PyTorch reference weights
+├── weights/
+│   └── drive_jepa_perception_based_agent_resnet34.ckpt # Hugging Face open checkpoint
+├── data/
+│   ├── create_sample_data.py        # Generates calibration and test driving datasets
+│   ├── calibration/                 # Calibration samples for INT8 PTQ (20 scenes)
+│   └── test_samples/                # Evaluation driving scenarios (highway, urban, turns)
+├── scripts/
+│   ├── download_weights.py          # Auto-downloader from Hugging Face (LinhanWang/Drive-JEPA)
+│   ├── export_onnx.py               # PyTorch -> ONNX exporter with topological checker
+│   ├── run_qai_hub_8650.py          # Qualcomm AI Hub job submission (compile, profile, infer)
+│   └── evaluate_pipeline.py         # 3-Stage KPI comparison: PyTorch vs ONNX vs QNN INT8
+├── results/
+│   ├── qnn_int8_predictions.npz     # On-device Snapdragon 8650 predictions
+│   └── evaluation_report.md         # Auto-generated quantitative KPI markdown report
+├── README.md
+└── requirements.txt
 ```
 
 ---
 
-## ðŸš€ Quickstart: Run the Entire Evaluation
+## 🚀 Quickstart: Run the Entire Evaluation
 
 You can run the entire workflow in 4 sequential commands:
 
@@ -66,7 +66,7 @@ python scripts/evaluate_pipeline.py
 
 ---
 
-## ðŸ“Š Key Performance Indicators (KPIs)
+## 📊 Key Performance Indicators (KPIs)
 
 The evaluation pipeline checks whether the converted INT8 model can still safely steer and plan trajectories within strict ADAS tolerances:
 
@@ -74,12 +74,12 @@ The evaluation pipeline checks whether the converted INT8 model can still safely
 | :--- | :--- | :--- | :--- | :--- |
 | **ADE (Average Displacement Error)** | $< 0.25\text{ m}$ | `0.0000 m` (Bit-Exact) | **`0.0609 m`** | **PASS** |
 | **FDE (Final Displacement Error @ 4s)** | $< 0.50\text{ m}$ | `0.0000 m` (Bit-Exact) | **`0.0640 m`** | **PASS** |
-| **Heading Angle Drift ($\Delta \theta$)** | $< 3.0^\circ$ | `0.00Â°` (Bit-Exact) | **`1.90Â°`** | **PASS** |
+| **Heading Angle Drift ($\Delta \theta$)** | $< 3.0^\circ$ | `0.00°` (Bit-Exact) | **`1.90°`** | **PASS** |
 | **8650 HTP Latency** | $< 50\text{ ms}$ ($> 20\text{ FPS}$) | N/A (Host CPU) | **`~32.4 ms`** (~30.8 FPS) | **REAL-TIME** |
 
 ---
 
-## ðŸ› ï¸ Qualcomm AI Hub Device Execution
+## 🛠️ Qualcomm AI Hub Device Execution
 Qualcomm AI Hub ([aihub.qualcomm.com](https://aihub.qualcomm.com)) lets you compile, quantize, and profile directly on physical cloud-hosted **Snapdragon 8 Gen 3 (SM8650)** devices for free.
 
 To use the cloud device lab:

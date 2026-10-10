@@ -1,0 +1,16 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Checkpoints larger than GitHub 100MB limit
+weights/*.ckpt
+weights/*.bin
+
+# Environments and IDE
+.env
+.venv
+env/
+venv/
+.vscode/
+.idea/

@@ -1,0 +1,33 @@
+{
+  "target_hardware": {
+    "device_name": "Snapdragon 8 Gen 3 (SM8650)",
+    "soc_tier": "SA8650 / SM8650",
+    "compute_unit": "Hexagon Tensor Processor (HTP)",
+    "vtcm_size_mb": 8.0,
+    "quantization_precision": "INT8 (W8A8)"
+  },
+  "execution_summary": {
+    "total_inference_time_ms": 32.42,
+    "throughput_fps": 30.84,
+    "htp_offload_percentage": 100.0,
+    "cpu_fallback_percentage": 0.0,
+    "vtcm_cache_hit_rate_pct": 99.8,
+    "dram_spill_bytes": 0
+  },
+  "layer_latency_breakdown_ms": {
+    "visual_backbone_conv_stem": 14.21,
+    "spatio_temporal_token_pooling": 3.82,
+    "ego_history_encoder": 0.58,
+    "context_conditioning": 2.11,
+    "trajectory_proposal_decoder": 7.53,
+    "scorer_and_collision_head": 2.87,
+    "primary_trajectory_gather": 1.30
+  },
+  "accuracy_kpi_summary": {
+    "average_displacement_error_m": 0.0609,
+    "final_displacement_error_m": 0.0640,
+    "heading_drift_deg": 1.90,
+    "max_lateral_deviation_m": 0.0877,
+    "safety_threshold_verdict": "PASSED"
+  }
+}
